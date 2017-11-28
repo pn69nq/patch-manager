@@ -19,7 +19,7 @@
     virtualenv venv
     source venv/bin/activate
     //关闭 venv
-    gunicorn -w4 -b0.0.0.0:5000 patch-manager:app
+    gunicorn -w4 -b0.0.0.0:5000 patch_manager:app
     #w worker数量，b 访问的地址
     #结束gunicron 使用pkill gunicorn
     
@@ -29,3 +29,13 @@
 
 
 参考http://www.jianshu.com/p/be9dd421fb8d
+
+# 项目结构
+
+1、后台管理模块
+
+2、接口模块
+
+3、共用库
+
+
