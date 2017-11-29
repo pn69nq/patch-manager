@@ -12,6 +12,9 @@
     1.3、安装virtualenv
     
         pip install virtualenv
+    
+    获取依赖可以使用pip freeze > requirements.txt
+    
 2、部署flask
 
 ```
