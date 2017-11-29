@@ -1,11 +1,12 @@
-import sys
 import os
+import sys
 
 from flask import Flask, jsonify, Response
 
 #解决找不到api module 问题
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from api.pb3 import ProtocBaseReply
+from common.util import Md5Util
 
 app = Flask(__name__)
 
@@ -31,16 +32,19 @@ def hellojson():
         'b': 2,
         'c': [3, 4, 5]
     }
-    return jsonify(t)
+    return jsonify(t)\
+
+@app.route('/md5file')
+def md5file():
+    md5file = os.path.dirname(__file__)+'/patch_signed_7zip.apk'
+    return Md5Util.CalcFileMD5(md5file)
 
 
 @app.route('/share/getPatch',methods=['post'])
 def getPatch():
     reply = ProtocBaseReply.BaseReply()
     reply.Code = 20000
-    reply.Message = "xxxx"
-
-
+    reply.Message = "补丁"
 
     data0 = ProtocBaseReply.BaseReply.SpareParameterEntry()
     data0.key = 'update'

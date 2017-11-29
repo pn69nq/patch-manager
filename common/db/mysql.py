@@ -1,3 +1,5 @@
 from flaskext.mysql import MySQL
-mysql = MySQL()
-mysql.init_app(app)
+class MySql():
+
+    def init(self):
+        mysql = MySQL()
