@@ -7,8 +7,10 @@ from flask import Flask, jsonify, Response
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from api.pb3 import ProtocBaseReply
 from common.util import Md5Util
+from api import config
 
 app = Flask(__name__)
+app.config.from_object(config)
 
 @app.route("/")
 def hello():

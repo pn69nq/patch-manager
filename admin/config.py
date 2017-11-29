@@ -9,4 +9,3 @@ MAIL_FROM_EMAIL = "ihelpgodness@sina.com" # 设置邮件来源
 # MYSQL_DATABASE_DB	default is None
 # MYSQL_DATABASE_CHARSET	default is ‘utf-8’
 #
-MySQL = {}
