@@ -1,5 +1,6 @@
 import os
 import sys
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from flask import Flask, jsonify, Response, request, render_template
@@ -9,7 +10,7 @@ from admin import config
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 app = Flask(__name__)
-app.config.from_object(config)
+app.config.from_object(config['development'])
 
 
 @app.route("/index")

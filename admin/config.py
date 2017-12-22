@@ -1,11 +1,23 @@
-DEBUG = True # 启动Flask的Debug模式
-MAIL_FROM_EMAIL = "ihelpgodness@sina.com" # 设置邮件来源
-#
-# MYSQL 配置
-# MYSQL_DATABASE_HOST	default is ‘localhost’
-# MYSQL_DATABASE_PORT	default is 3306
-# MYSQL_DATABASE_USER	default is None
-# MYSQL_DATABASE_PASSWORD	default is None
-# MYSQL_DATABASE_DB	default is None
-# MYSQL_DATABASE_CHARSET	default is ‘utf-8’
-#
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+class BaseConfig:  # 基本配置类
+    SECRET_KEY = os.getenv('SECRET_KEY', 'some secret words')
+    ITEMS_PER_PAGE = 10
+
+class DevelopmentConfig(BaseConfig):
+    DEBUG = True
+
+class TestingConfig(BaseConfig):
+    TESTING = True
+    DEBUG = True
+
+class ReleaseConfig(BaseConfig):
+    DEBUG = False
+
+config = {
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'default': DevelopmentConfig,
+    'release': ReleaseConfig
+}
