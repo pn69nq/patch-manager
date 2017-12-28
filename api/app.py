@@ -38,9 +38,8 @@ def hellojson():
 		'b': 2,
 		'c': [3, 4, 5]
 	}
-	return jsonify(t) \
- \
- \
+	return jsonify(t)
+
 @app.route('/md5file')
 def md5file():
 	md5file = os.path.dirname(__file__) + '/patch_signed_7zip.apk'
@@ -48,8 +47,8 @@ def md5file():
 
 
 # 下载补丁包格式url+/patch/patch_signed_7zip.apk
-@app.route('/patch/<patch_name>', methods=['GET'])
-def getApk(patch_name):
+@app.route('/res/<res_name>', methods=['GET'])
+def getApk(res_name):
 	def _f(abs_path):
 		with open(abs_path, 'rb') as f:
 			m = 500 * (1 << 10)
@@ -58,9 +57,10 @@ def getApk(patch_name):
 				yield chunk
 				if not chunk:
 					break
-
 	try:
-		abs_path = os.path.dirname(__file__) + '/apk_patch/' + patch_name
+		print(app.config)
+		print(app.config['RESDIR'])
+		abs_path = os.path.join(app.config['RESDIR'],res_name)
 		mimetype = 'application/octet-stream'
 		return Response(
 			_f(abs_path), mimetype=mimetype,
@@ -85,7 +85,7 @@ def getPatch():
 	data1.value = '11111'
 	data2 = ProtocBaseReply.BaseReply.SpareParameterEntry()
 	data2.key = 'patchUrl'
-	data2.value = baseUrl + '/patch/patch_signed_7zip.apk'
+	data2.value = baseUrl + '/res/patch_signed_7zip.apk'
 
 	reply.spareParameter.append(data0)
 	reply.spareParameter.append(data1)
